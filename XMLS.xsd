@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="winforms"
+    targetNamespace="winforms"
+    attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:wf="winforms"
+>
+  <xs:complexType name="CoverType">
+    <xs:sequence>
+      <xs:element name="BG" type="wf:ColorType" minOccurs="1"/>
+      <xs:element name="TC" type="wf:ColorType" minOccurs="1"/>
+      <xs:element name="Text" type="wf:TextType" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="Author" type="xs:string" use="required"/>
+    <xs:attribute name="Title" type="xs:string" use="required"/>
+    <xs:attribute name="SpineSize" type="xs:int" use="required"/>
+    <xs:attribute name="Height" type="xs:int" use="required"/>
+    <xs:attribute name="Width" type="xs:int" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="ColorType">
+    <xs:attribute name="b" type="xs:int" use="required"/>
+    <xs:attribute name="g" type="xs:int" use="required"/>
+    <xs:attribute name="r" type="xs:int" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="TextType">
+    <xs:attribute name="alignement" type="xs:int" use="required"/>
+    <xs:attribute name="y" type="xs:int" use="required"/>
+    <xs:attribute name="x" type="xs:int" use="required"/>
+    <xs:attribute name="size" type="xs:int" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:element name="Cover" type="wf:CoverType"/>
+
+</xs:schema>

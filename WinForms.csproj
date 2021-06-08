@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+  <ItemGroup>
+    <ResourceFile Include="XMLS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateClassesFromXSD</Generator>
+    </ResourceFile>
+  </ItemGroup>
+
+  <Target Name="UpdateClassesFromXSD" DependsOnTargets="_UpdateClassesFromXSD" Condition="'@(ResourceFile)' != ''">
+    <ItemGroup>
+      <Compile Include="$(IntermediateOutputPath)fromxsd/*.cs" />
+    </ItemGroup>
+  </Target>
+  <Target Name="_UpdateClassesFromXSD" Inputs="XMLS.xsd" Outputs="$(IntermediateOutputPath)fromxsd/*.cs">
+    <Exec Command="mkdir $(IntermediateOutputPath)fromxsd" IgnoreExitCode="true" />
+    <Exec Command="&quot;C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\xsd.exe&quot; /c /n:winforms /out:$(IntermediateOutputPath)fromxsd XMLS.xsd" />
+  </Target>
+  <PropertyGroup>
+    <CoreCompileDependsOn>UpdateClassesFromXSD;$(CoreCompileDependsOn)</CoreCompileDependsOn>
+  </PropertyGroup>
+</Project>
